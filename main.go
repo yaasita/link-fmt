@@ -24,6 +24,8 @@ func main() {
 	}
 	fp.Close()
 	// 書き出し
+
+    fw, _ := os.Create(os.Args[1])
 	for _, v := range str {
 		if http := regexp.MustCompile("^http"); http.MatchString(v) {
 			v = http.ReplaceAllString(v, "- http")
@@ -37,5 +39,7 @@ func main() {
 			v = "## " + v
 		}
 		fmt.Println(v)
+        fw.Write([]byte( v + "\n"))
 	}
+    fw.Close()
 }
