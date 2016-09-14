@@ -30,13 +30,13 @@ func main() {
 		if http := regexp.MustCompile("^http"); http.MatchString(v) {
 			v = http.ReplaceAllString(v, "- http")
 		} else if title := regexp.MustCompile(`^[^\-\#]`); title.MatchString(v) {
-			rep1 := regexp.MustCompile(`[\[\]～－]`)
+			rep1 := regexp.MustCompile(`[\[\]～－\/\.]`)
 			v = rep1.ReplaceAllString(v, "")
 
-			rep2 := regexp.MustCompile(`[\s\,]`)
+			rep2 := regexp.MustCompile(`[\s\,]+`)
 			v = rep2.ReplaceAllString(v, "_")
 
-			v = "## " + v
+			v = "## " + v + "\n"
 		}
 		fmt.Println(v)
         fw.Write([]byte( v + "\n"))
