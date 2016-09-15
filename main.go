@@ -36,7 +36,7 @@ func main() {
 			rep2 := regexp.MustCompile(`[\s\,]+`)
 			v = rep2.ReplaceAllString(v, "_")
 
-			v = "## " + v + "\n"
+			v = "## " + v + ".mp4" + "\n"
 		}
 		fmt.Println(v)
         fw.Write([]byte( v + "\n"))
