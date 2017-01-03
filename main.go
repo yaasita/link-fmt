@@ -27,19 +27,26 @@ func main() {
 
 	fw, _ := os.Create(os.Args[1])
 	for _, v := range str {
-		if http := regexp.MustCompile("^http"); http.MatchString(v) {
-			v = http.ReplaceAllString(v, "- http")
-		} else if title := regexp.MustCompile(`^[^\-\#]`); title.MatchString(v) {
-			rep1 := regexp.MustCompile(`[\[\]～－\/\.　\?]`)
-			v = rep1.ReplaceAllString(v, "")
-
-			rep2 := regexp.MustCompile(`[\s\,]+`)
-			v = rep2.ReplaceAllString(v, "_")
-
-			v = "## " + v + ".mp4" + "\n"
-		}
-		fmt.Println(v)
-		fw.Write([]byte(v + "\n"))
+		replace_str := replace_url(v)
+		fmt.Println(replace_str)
+		fw.Write([]byte(replace_str + "\n"))
 	}
 	fw.Close()
+}
+
+func replace_url(str string) string {
+	if http := regexp.MustCompile("^http"); http.MatchString(str) {
+		return http.ReplaceAllString(str, "- http")
+	} else if title := regexp.MustCompile(`^[^\-\#]`); title.MatchString(str) {
+		new_str := str
+		rep1 := regexp.MustCompile(`[\[\]～－\/\.　\?\!\:\(\)]`)
+		new_str = rep1.ReplaceAllString(new_str, "")
+
+		rep2 := regexp.MustCompile(`[\s\,]+`)
+		new_str = rep2.ReplaceAllString(new_str, "_")
+
+		new_str = "## " + new_str + ".mp4" + "\n"
+		return new_str
+	}
+	return str
 }
