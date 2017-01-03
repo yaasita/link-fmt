@@ -25,12 +25,12 @@ func main() {
 	fp.Close()
 	// 書き出し
 
-    fw, _ := os.Create(os.Args[1])
+	fw, _ := os.Create(os.Args[1])
 	for _, v := range str {
 		if http := regexp.MustCompile("^http"); http.MatchString(v) {
 			v = http.ReplaceAllString(v, "- http")
 		} else if title := regexp.MustCompile(`^[^\-\#]`); title.MatchString(v) {
-			rep1 := regexp.MustCompile(`[\[\]～－\/\.　]`)
+			rep1 := regexp.MustCompile(`[\[\]～－\/\.　\?]`)
 			v = rep1.ReplaceAllString(v, "")
 
 			rep2 := regexp.MustCompile(`[\s\,]+`)
@@ -39,7 +39,7 @@ func main() {
 			v = "## " + v + ".mp4" + "\n"
 		}
 		fmt.Println(v)
-        fw.Write([]byte( v + "\n"))
+		fw.Write([]byte(v + "\n"))
 	}
-    fw.Close()
+	fw.Close()
 }
