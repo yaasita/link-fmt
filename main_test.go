@@ -20,3 +20,11 @@ func TestReplace2(t *testing.T) {
 		t.Errorf("after = %s", after)
 	}
 }
+
+func TestReplace3(t *testing.T) {
+	after := replace_url("あい&う&&")
+	after = strings.TrimRight(after, "\n")
+	if after != "## あいう.mp4" {
+		t.Errorf("after = %s", after)
+	}
+}

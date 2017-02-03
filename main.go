@@ -39,7 +39,7 @@ func replace_url(str string) string {
 		return http.ReplaceAllString(str, "- http")
 	} else if title := regexp.MustCompile(`^[^\-\#]`); title.MatchString(str) {
 		new_str := str
-		rep1 := regexp.MustCompile(`[\[\]～－\/\.　\?\!\:\(\)]`)
+		rep1 := regexp.MustCompile(`[\[\]～－\/\.　\?\!\:\(\)\&]`)
 		new_str = rep1.ReplaceAllString(new_str, "")
 
 		rep2 := regexp.MustCompile(`[\s\,]+`)
