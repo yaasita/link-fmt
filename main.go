@@ -24,7 +24,6 @@ func main() {
 	}
 	fp.Close()
 	// 書き出し
-
 	fw, _ := os.Create(os.Args[1])
 	for _, v := range str {
 		replace_str := replace_url(v)
