@@ -28,3 +28,11 @@ func TestReplace3(t *testing.T) {
 		t.Errorf("after = %s", after)
 	}
 }
+
+func TestReplace4(t *testing.T) {
+	after := replace_url("aa~bb")
+	after = strings.TrimRight(after, "\n")
+	if after != "## aa_bb.mp4" {
+		t.Errorf("after = %s", after)
+	}
+}

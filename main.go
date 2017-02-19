@@ -41,7 +41,7 @@ func replace_url(str string) string {
 		rep1 := regexp.MustCompile(`[\[\]～－\/\.　\?\!\:\(\)\&]`)
 		new_str = rep1.ReplaceAllString(new_str, "")
 
-		rep2 := regexp.MustCompile(`[\s\,]+`)
+		rep2 := regexp.MustCompile(`[\s\,\~]+`)
 		new_str = rep2.ReplaceAllString(new_str, "_")
 
 		new_str = "## " + new_str + ".mp4" + "\n"
